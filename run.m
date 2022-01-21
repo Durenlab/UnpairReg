@@ -1,5 +1,6 @@
 function run(k,lambda,range,d0,outdir)
 load('Input.mat','E','O','Symbol_location','Symbol','Peak_location')
+RE_filter=full(log(O+1));
 gene_loc=Symbol_location;
 enhancer_loc=Peak_location;
 enhancer_index_for_gene = cell(size(gene_loc,1),1);%save the enhancer for the ith gene within 1M
@@ -36,7 +37,6 @@ clear KNN1 KNN2;
 clear O tf1 idf O1;
 %%%%%%%%%%%%%%%%imputation
 TG_filter=full(TG1);
-RE_filter=full(RE);
 beta_nonzero_idx=full(beta_nonzero_idx);
 [RE_filter1,KNN1]=immupute_dis(RE_filter,dim100_RE,k);
 [TG_filter1,KNN2]=immupute_dis(TG_filter,dim100_TG,k);
