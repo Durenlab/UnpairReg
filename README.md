@@ -20,7 +20,7 @@ source("impute_dis.R")
 source("UnpairReg.R")
 source("Estimate_quadratic.R")
 result=h5tom("pbmc_granulocyte_sorted_10k_filtered_feature_bc_matrix.h5")
-predict=UnpairReg(result)
+predict=UnpairReg(result,d0=10000,lambda=10^7)
 TG_prediction=predict[[1]]
 cis_regulate=predict[[2]]
 ```
