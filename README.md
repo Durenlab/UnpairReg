@@ -10,10 +10,10 @@ The input data could by an htf5 file including RNA-seq data and ATAC-seq data. W
 wget https://cf.10xgenomics.com/samples/cell-arc/2.0.0/pbmc_granulocyte_sorted_10k/pbmc_granulocyte_sorted_10k_filtered_feature_bc_matrix.h5
 ```
 Then we can download the code to the same folder 
- ```
- git clone Seurat
- ```
-Run UnpairReg in R:
+```
+git clone https://github.com/Durenlab/UnpairReg.git
+```
+Then, we can run UnpairReg in R:
 ```
 source("h5tom.R")
 source("impute_dis.R")
