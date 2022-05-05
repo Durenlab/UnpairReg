@@ -26,7 +26,7 @@ cis_regulate=predict[[2]]
 ```
 Output:
 
-The output including TG_prediction and cis_regulate, which represent the predicted gene expression and the cis-regulatory network.
+The output includes TG_prediction and cis_regulate, which represent the predicted gene expression and the cis-regulatory network.
 
 
 **Requirements**
