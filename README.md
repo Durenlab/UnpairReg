@@ -1,11 +1,12 @@
 # UnpairReg
-UnpairReg deals with unpaired single cell multi-omics data, providing accurate estimation of cis-regulatory network and gene expression for cells in which chromatin accessibility is available.
+UnpairReg deals with unpaired single cell multi-omics data, providing accurate estimation of gene expression for cells in which chromatin accessibility is available as well as cis-regulatory network.
 
+The input is scRNA-seq and scATAC-seq data from the same tissue/context but from different cells. 
 **Run**
 
 Input:
 
-The input data could by an htf5 file including RNA-seq data and ATAC-seq data. We provide the code for PBMC 10x genomic data. We first download data:
+The input data could be an htf5 file including RNA-seq data and ATAC-seq data. We provide the code for PBMC 10x genomic data. We first download data:
 ```
 wget https://cf.10xgenomics.com/samples/cell-arc/2.0.0/pbmc_granulocyte_sorted_10k/pbmc_granulocyte_sorted_10k_filtered_feature_bc_matrix.h5
 ```
