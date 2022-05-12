@@ -5,16 +5,18 @@ The input is scRNA-seq and scATAC-seq data from the same tissue/context but from
 
 **Run**
 
+We can download the code to the same folder 
+```
+git clone https://github.com/Durenlab/UnpairReg.git
+```
 Input:
 
 The input data could be an htf5 file including RNA-seq data and ATAC-seq data. We provide the code for PBMC 10x genomic data. We first download data:
 ```
+cd UnpairReg
 wget https://cf.10xgenomics.com/samples/cell-arc/2.0.0/pbmc_granulocyte_sorted_10k/pbmc_granulocyte_sorted_10k_filtered_feature_bc_matrix.h5
 ```
-Then we can download the code to the same folder 
-```
-git clone https://github.com/Durenlab/UnpairReg.git
-```
+
 Then, we can run UnpairReg in R:
 ```
 source("h5tom.R")
