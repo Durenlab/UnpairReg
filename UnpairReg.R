@@ -6,18 +6,12 @@ E=result[[1]]
 O=result[[2]]
 Symbol_location=result[[3]]
 Peak_location=result[[4]]
-TG_filter=E[Matrix::rowSums(E)>0,]
-RE_filter=O[Matrix::rowSums(O)>0,]
-Symbol_location=Symbol_location[Matrix::rowSums(E)>0,]
-Peak_location=Peak_location[Matrix::rowSums(O)>0,]
-gene_count=Matrix::rowSums(TG_filter>0)
-#f1=order(-gene_count)
-region_count=Matrix::rowSums(RE_filter>0)
-#f2=order(-region_count)
-N1=floor(dim(TG_filter)[1]*0.01);
-N2=floor(dim(RE_filter)[1]*0.01);
-TG_filter=TG_filter[gene_count>N1,]
-RE_filter=RE_filter[region_count>N2,]
+gene_count=Matrix::rowSums(E>0)
+region_count=Matrix::rowSums(O>0)
+N1=floor(dim(E)[2]*0.1);
+N2=floor(dim(O)[2]*0.1);
+TG_filter=E[gene_count>N1,]
+RE_filter=O[region_count>N2,]
 Symbol_location=Symbol_location[gene_count>N1,]
 Peak_location=Peak_location[region_count>N2,]
 TG_filter=TG_filter[,Matrix::colSums(TG_filter)>0]
@@ -51,12 +45,12 @@ O1[is.na(O1)]=0;
 #impute RE TG matrix
 library(Seurat)
 O_s=CreateSeuratObject(O1)
-O_s <- FindVariableFeatures(O_s, selection.method = "vst", nfeatures = floor(N2/2))
+O_s <- FindVariableFeatures(O_s, selection.method = "vst", nfeatures = floor(dim(RE_filter)[1]/4))
 O_s <- ScaleData(O_s)
 O_s <- RunPCA(O_s,npcs = 100)#!!! time consuming
 score=O_s@reductions$pca@cell.embeddings
 O_s=CreateSeuratObject(TG_filter)
-O_s <- FindVariableFeatures(O_s, selection.method = "vst", nfeatures = floor(N1/2))
+O_s <- FindVariableFeatures(O_s, selection.method = "vst", nfeatures = floor(dim(TG_filter)[1]/4))
 O_s <- ScaleData(O_s)
 O_s <- RunPCA(O_s,npcs = 100)#!!! time consuming
 score_TG=O_s@reductions$pca@cell.embeddings
@@ -97,6 +91,7 @@ for (i in 1:n){
   TG_predict1[,i]=RE11[,beta_nonzero_idx[,i]==1]%*%beta[beta_nonzero_idx[,i]==1,i];
 }
 TG_predict3=TG_predict1*(b%*%matrix(1,nrow=1,ncol=dim(TG_predict)[2]))/mean(b)# %adjust by RE data
+TG_predict3[TG_predict3<0]=0
 colnames(TG_predict3)=colnames(TG_filter1)
 rownames(TG_predict3)=rownames(TG_filter1)
 beta1=beta[2:dim(beta)[1],]
