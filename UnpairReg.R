@@ -92,8 +92,31 @@ for (i in 1:n){
 }
 TG_predict3=TG_predict1*(b%*%matrix(1,nrow=1,ncol=dim(TG_predict)[2]))/mean(b)# %adjust by RE data
 TG_predict3[TG_predict3<0]=0
-colnames(TG_predict3)=colnames(TG_filter1)
-rownames(TG_predict3)=rownames(TG_filter1)
+colnames(TG_predict3)=rownames(TG_filter)
+rownames(TG_predict3)=colnames(TG_filter)
 beta1=beta[2:dim(beta)[1],]
-return(list(TG_predict3,beta1))
+# R=Matrix::t(TG_filter)%*%TG_filter;#TG-TG
+R=t(TG_filter1)%*%(TG_filter1);#TG-TG
+R=R*dim(TG_predict3)[1]/dim(TG_filter1)[1];
+lambda=0.5;
+peak_count=rowSums(O1>0);
+f=order(peak_count);
+n=floor(length(peak_count)/2);
+R2=Matrix::t(O1[f[1:n],])%*%O1[f[1:n],]#use the half peaks highly specific
+R2_rna=t(TG_filter1)%*%(TG_filter1);#cell by cell
+scal=mean(R2_rna)/dim(TG_filter1)[1]*dim(O1)[2];
+R2_rna=R2_rna/dim(TG_filter1)[1]*dim(O1)[2];
+R2=R2/mean(R2)*scal;
+d=diag(R2)/mean(diag(R2))*mean(diag(R2_rna));
+R2=R2-diag(diag(R2))+diag(d);
+X=TG_predict3;
+R=as.matrix(R)
+R2=as.matrix(R2)
+for (i in 1:200){
+  temp=(1+lambda)*X%*%t(X)%*%X
+  temp[temp<10^(-20)]=10^(-20)
+  X=X*(X%*%R+lambda*R2%*%X)/temp
+}
+rownames(beta1)=rownames(RE_filter)
+return(list(X,beta1))
 }
