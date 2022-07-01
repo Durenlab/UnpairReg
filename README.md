@@ -35,4 +35,4 @@ The output includes TG_prediction and cis_regulate, which represent the predicte
 
 **Requirements**
 
-R packages: rhdf5, stringr, tidyr, Matrix, pracma, Seurat.
+R packages: rhdf5, stringr, tidyr, Matrix, pracma, Seurat. 
