@@ -3,13 +3,13 @@ UnpairReg deals with unpaired single cell multi-omics data, providing accurate e
 
 The input is scRNA-seq and scATAC-seq data from the same tissue/context but from different cells. 
 
-**Run**
+## Run
 
 For the first step, we can download the code by
 ```
 git clone https://github.com/Durenlab/UnpairReg.git
 ```
-Input:
+### Input:
 
 The input data could be an htf5 file including RNA-seq data and ATAC-seq data. We provide the code for PBMC 10x genomic data. We first download data:
 ```
@@ -28,11 +28,13 @@ predict=UnpairReg(result,d0=10000,lambda=10^7)
 TG_prediction=predict[[1]]
 cis_regulate=predict[[2]]
 ```
-Output:
+### Output:
 
 The output includes TG_prediction and cis_regulate, which represent the predicted gene expression and the cis-regulatory network.
 
 
-**Requirements**
+### Requirements
 
 R packages: rhdf5, stringr, tidyr, Matrix, pracma, Seurat. 
+## Reference
+Yuan, Qiuyue, and Zhana Duren. "Integration of single-cell multi-omics data by regression analysis on unpaired observations." Genome biology 23.1 (2022): 1-19. https://link.springer.com/article/10.1186/s13059-022-02726-7 
