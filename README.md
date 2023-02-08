@@ -7,7 +7,7 @@ The input is scRNA-seq and scATAC-seq data from the same tissue/context but from
 ## Run
 
 For the first step, we can download the code by
-```
+```sh
 git clone https://github.com/Durenlab/UnpairReg.git
 ```
 ### Input:
