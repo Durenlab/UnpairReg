@@ -36,7 +36,12 @@ predict=UnpairReg(result,d0=10000,lambda=10^7)
 TG_prediction=predict[[1]]
 cis_regulate=predict[[2]]
 ```
-### Input a multimodal data
+### Output:
+
+The output includes TG_prediction and cis_regulate, which represent the predicted gene expression and the cis-regulatory network.
+
+### Input a multiomic data
+We can also take the multiomic data as input.
 ```sh
 cd UnpairReg
 wget https://cf.10xgenomics.com/samples/cell-arc/2.0.0/pbmc_granulocyte_sorted_10k/pbmc_granulocyte_sorted_10k_filtered_feature_bc_matrix.h5
@@ -53,10 +58,6 @@ predict=UnpairReg(result,d0=10000,lambda=10^7)
 TG_prediction=predict[[1]]
 cis_regulate=predict[[2]]
 ```
-### Output:
-
-The output includes TG_prediction and cis_regulate, which represent the predicted gene expression and the cis-regulatory network.
-
 
 ### Requirements
 
