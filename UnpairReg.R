@@ -93,7 +93,7 @@ for (i in 1:n){
 TG_predict3=TG_predict1*(b%*%matrix(1,nrow=1,ncol=dim(TG_predict)[2]))/mean(b)# %adjust by RE data
 TG_predict3[TG_predict3<0]=0
 colnames(TG_predict3)=rownames(TG_filter)
-rownames(TG_predict3)=colnames(TG_filter)
+rownames(TG_predict3)=colnames(RE_filter)
 beta1=beta[2:dim(beta)[1],]
 # R=Matrix::t(TG_filter)%*%TG_filter;#TG-TG
 R=t(TG_filter1)%*%(TG_filter1);#TG-TG
